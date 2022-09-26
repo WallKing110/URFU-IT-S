@@ -6,7 +6,7 @@ let inText = fs.readFileSync(arg[3], "utf-8");
 if (arg[2] == "encode")
 {
 	for (var str_point=0, repeat_count = 1, str_result = ''; str_point <= inText.length; ++str_point) {
-		if (inText.charAt(str_point) == inText.charAt(str_point+1)) repeat_count++;
+		if ((inText.charAt(str_point) == inText.charAt(str_point+1))&&(repeat_count != 256)) repeat_count++;
 		else {
 			if (repeat_count >= 4){
 				str_result +="#" + String.fromCharCode(repeat_count) + inText.charAt(str_point);
