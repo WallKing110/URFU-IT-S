@@ -1,3 +1,4 @@
+//ФИО - Саламахин Кирилл П.
 const fs = require("fs")
 var arg = process.argv;
 
