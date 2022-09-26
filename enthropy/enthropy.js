@@ -1,12 +1,15 @@
-var fs = require("fs");
+const fs = require("fs");
 var arg = process.argv;
 
-var fileInput = arg[2];
-let file = fs.readFileSync(fileInput, "utf-8");
+function getBaseLog(x, y) {
+  return Math.log(y) / Math.log(x);
+}
+
+let file = fs.readFileSync(arg[2], "utf-8");
 
 var alphSize = 0;
 var alphQuant = 0;
-alph = new Array();
+alph = new Array();//Инициализация массива
 for (let i = 0; i<file.length;i++){
 	if (file.charAt(i) in alph){
 	alph[file.charAt(i)]++;
@@ -20,10 +23,8 @@ for (let i = 0; i<file.length;i++){
 
 var enthropy = 0;
 for (i in alph){
-	alph[i] /= alphQuant;
-	enthropy -= alph[i]* Math.log(alph[i])
+	alph[i] /= alphQuant;//Вероятность вместо элементов
+	enthropy -= alph[i]* getBaseLog(alphSize,alph[i])//Подсчет элемента массива как элемента суммы энтропии+сложение
 }
-enthropy /= Math.log(alphSize)
 
 console.log(enthropy);
-
