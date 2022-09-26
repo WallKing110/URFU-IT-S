@@ -7,6 +7,10 @@ function getBaseLog(x, y) {
 
 let file = fs.readFileSync(arg[2], "utf-8");
 
+if (file.length == 1){
+	console.log('1');
+	return 1
+}
 var alphSize = 0;
 var alphQuant = 0;
 alph = new Array();//Инициализация массива
