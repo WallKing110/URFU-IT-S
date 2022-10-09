@@ -1,5 +1,5 @@
 Саламахин Кирилл, МЕН-120206
-haffman.js encode input output table code
+huffman.js encode input output table code
 encode - показатель того, что нужно кодировать, а не декодировать
 input -  путь к файлу со строкой которую нужно закодировать,
 output-  путь к файлу куда нужно выгрузить закодированную строку
