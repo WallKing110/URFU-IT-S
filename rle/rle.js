@@ -1,4 +1,3 @@
-//ФИО - Саламахин Кирилл П.
 const fs = require("fs")
 var arg = process.argv;
 
@@ -9,6 +8,10 @@ if (arg[2] == "encode")
 	for (var str_point=0, repeat_count = 1, str_result = ''; str_point <= inText.length; ++str_point) {
 		if ((inText.charAt(str_point) == inText.charAt(str_point+1))&&(repeat_count != 256)) repeat_count++;
 		else {
+			if (inText.charAt(str_point) == '#'){
+				str_result += "#" + String.fromCharCode(repeat_count) + inText.charAt(str_point);
+				continue;
+			}
 			if (repeat_count >= 4){
 				str_result +="#" + String.fromCharCode(repeat_count) + inText.charAt(str_point);
 			}
