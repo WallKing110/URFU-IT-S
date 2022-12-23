@@ -1,0 +1,16 @@
+Interpetator.js - Интерпретатор языка без имени на js. Сами файлы ЯБИ хранятся в файлах, расширение которых подвержено чтению с помощью fs.
+Возможности(команды) языка:
+in [address] - записывает введеное в консоль значение в ячейку памяти [address]
+out [address] - выводит в консоль значение из ячейка памяти [address]
+set [address] [value] - записывает значение [value] в ячейку памяти [address]
+add [address1] [address2] [address3] - записывает в ячейку памяти [address3] сумму значений из ячеек памяти [address1] и [address2]
+mul [address1] [address2] [address3] - записывает в ячейку памяти [address3] произведение значений из ячеек памяти [address1] и [address2]
+div [address1] [address2] [address3] - записывает в ячейку памяти [address3] частное значений из ячеек памяти [address1] и [address2]
+mod [address1] [address2] [address3] - записывает в ячейку памяти [address3] остаток от деления значений из ячеек памяти [address1] и [address2]
+inc [address] - записывает в ячейку памяти [address] сумму значений этой ячейки и единицы
+cmp [address1] [address2] [address3] - записывает в ячейку памяти [address3] true если значения в ячейках [address1] и [address2] равны, false если не равны
+cmpg [address1] [address2] [address3] - записывает в ячейку памяти [address3] true если значение в ячейке [address1] больше чем значение в ячейке [address2], false если не больше
+jmp [address] - переноставляет ip в ячейку [address]
+jmpt [address1] [address2] - переноставляет ip в ячейку [address1] если значение в ячейке [address2] true, не переставляет если false
+jmpf [address1] [address2] - переноставляет ip в ячейку [address1] если значение в ячейке [address2] false, не переставляет если true
+exit - заканчивает работу программы
