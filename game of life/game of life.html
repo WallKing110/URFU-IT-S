@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Game of Life</title>
+</head>
+<body>
+<canvas id="myCanvas" width="600px" height="600px" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script>
+const fillSize = 60;
+const cellSize = 10;
+var paused = true;
+var timeout = 1000;
+let currPop = new Array(fillSize);
+let nextPop = new Array(fillSize);
+let c = document.getElementById("myCanvas");
+let ctx = c.getContext("2d");
+for(i=0; i< fillSize; i++){
+	currPop[i] = new Array(fillSize);
+	nextPop[i] = new Array(fillSize);
+}
+
+function initRand(){
+	if (paused != false){
+		for(i=0; i< fillSize; i++){
+			for(j=0; j< fillSize; j++){
+				currPop[i][j] = Math.round(Math.random(2));
+				nextPop[i][j] = currPop[i][j];
+			}
+		}
+		draw();
+	}
+	else
+		alert("Stop life before generation!");
+}
+function clear(){
+	for(i=0; i< fillSize; i++){
+		for(j=0; j< fillSize; j++){
+			currPop[i][j] = 0;
+			nextPop[i][j] = currPop[i][j];
+		}
+	}
+}
+function draw(){
+	for(i=0; i< fillSize; i++){
+		for(j=0; j< fillSize; j++){
+			if(currPop[i][j] == 1)
+				ctx.fillStyle = "#FF0000";
+			else
+				ctx.fillStyle = "#FFFFFF";
+			ctx.fillRect(i*cellSize, j*cellSize, cellSize, cellSize);
+		}
+	}
+}
+function pass(){return 0};
+function neighbourCount(i, j){
+	num = 0;
+	for(l=-1; l <= 1; l++){
+		for(k=-1; k<= 1; k++){
+			if ((l != 0) || (k != 0))
+				num += currPop[(i+l+fillSize)%fillSize][(j+k+fillSize)%fillSize];
+		}
+	}
+	return num;
+}
+function nextGen(){
+	for(i=0; i< fillSize; i++){
+		for(j=0; j< fillSize; j++){
+		//TODO счёт
+			nc = neighbourCount(i,j);
+			if (((currPop[i][j] == 0) && (nc == 3)) || ((currPop[i][j] == 1) && ((nc == 3) || (nc == 2))))
+				nextPop[i][j] = 1;
+			else
+				nextPop[i][j] = 0;
+			currPop[i][j] = nextPop[i][j];
+		}
+	}
+}
+function step(){
+	nextGen();
+	draw();
+}
+function statusChangeButtonClick(){
+    let elem = document.getElementById("move");
+	paused = !paused;
+    if (elem.value=="Go"){
+		elem.value = "Stop";
+		game();
+	}
+    else
+		elem.value = "Go";
+}
+function increaseTimeout(){
+	timeout+=100;
+}
+function decreaseTimeout(){
+	timeout-=100;
+}
+function game(){
+	if (paused == false){
+		step();
+		setTimeout(() => {
+			game();
+		}, timeout);
+}
+}
+ 
+</script>
+<p><input type='button', value = 'Generate with random', onClick = 'initRand()' /> </p>
+<p><input id='move' type='button', value = 'Go', onClick = 'statusChangeButtonClick()' /> </p>
+<p><input id='speed' type='button', value = 'Up speed', onClick = 'decreaseTimeout()' /> </p>
+<p><input id='speed' type='button', value = 'Down speed', onClick = 'increaseTimeout()' /> </p>
+</body>
+</html>
+ 
